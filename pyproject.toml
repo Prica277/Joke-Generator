@@ -10,6 +10,7 @@ packages = [{include = "joke_generator"}]
 python = "^3.9"
 requests = "^2.31.0"
 pyqt6 = "^6.6.1"
+pytest = "^8.1.1"
 
 
 [build-system]
