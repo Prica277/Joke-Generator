@@ -65,7 +65,7 @@ class MainWindow(QWidget):
         joke_number_slider.setSingleStep(10)
 
         #adding the joke number slider
-        main_layout.addWidget(joke_number_slider, 2, 0)
+        main_layout.addWidget(joke_number_slider, 1, 1)
 
         #explanation_type_label
         explanation_type_label = QLabel("Enter the type of joke:")
@@ -73,7 +73,7 @@ class MainWindow(QWidget):
         #aligning the explanation label
 
         #adding the explanation label
-        main_layout.addWidget(explanation_type_label, 3, 0)
+        main_layout.addWidget(explanation_type_label, 2, 0)
         self.setLayout(main_layout)
 
 
