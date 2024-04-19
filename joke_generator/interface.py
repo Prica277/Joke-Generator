@@ -59,7 +59,7 @@ class MainWindow(QWidget):
         main_layout.addWidget(explanation_number_label, 1, 0)
 
         #joke number slider
-        joke_number_slider = QSlider()
+        joke_number_slider = QSlider(Qt.Orientation.Horizontal)
         joke_number_slider.setMinimum(1)
         joke_number_slider.setMaximum(10) 
         joke_number_slider.setSingleStep(10)
@@ -76,8 +76,23 @@ class MainWindow(QWidget):
         main_layout.addWidget(explanation_type_label, 2, 0)
         self.setLayout(main_layout)
 
+        #joke type input box
+        joke_type_input = QLineEdit()
+        joke_type_input.setMaxLength(15)
+        joke_type_input.setPlaceholderText("Type here!")
+        """
+        joke_type_input.returnPressed.connect(self.return_pressed)
+        joke_type_input.selectionChanged.connect(self.selection_changed)
+        joke_type_input.textChanged.connect(self.text_changed)
+        joke_type_input.textEdited.connect(self.text_edited)
+        """
+        #aligning the joke type input box
+
+        #adding the joke type input box
+
 
 app = QApplication(sys.argv)
+app.setStyle("Fusion")
 
 window = MainWindow()
 window.show()
