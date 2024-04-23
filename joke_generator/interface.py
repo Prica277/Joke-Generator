@@ -48,6 +48,7 @@ class MainWindow(QWidget):
                                  Qt.AlignmentFlag.AlignTop)
         
         #coloring title label
+        title_label.setStyleSheet("background-color:#C3ABD0")
         """
         BROKEN:
         title_label.setAutoFillBackground(True)
@@ -63,6 +64,9 @@ class MainWindow(QWidget):
         #explaning the use of joke number slider
         explanation_number_label = QLabel("Select amount of jokes (1 or 10)")
 
+        #coloring explanation label
+        explanation_number_label.setStyleSheet("background-color:#FFE599")
+
         #adding the explanation label
         main_layout.addWidget(explanation_number_label, 1, 0)
 
@@ -77,6 +81,9 @@ class MainWindow(QWidget):
 
         #explanation_type_label
         explanation_type_label = QLabel("Enter the type of joke:")
+
+        #coloring explanation label
+        explanation_type_label.setStyleSheet("background-color:#FFE599")
 
         #adding the explanation label
         main_layout.addWidget(explanation_type_label, 2, 0)
@@ -100,8 +107,8 @@ class MainWindow(QWidget):
         #Go button (should switch between layouts)
         go_button = QPushButton("Go!")
 
-        #aligning go_button
-        
+        #coloring go button
+        go_button.setStyleSheet("background-color:#97D077")
 
         #adding go_button
         main_layout.addWidget(go_button, 3, 2)
