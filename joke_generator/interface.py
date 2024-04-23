@@ -9,8 +9,8 @@ from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import (
     QApplication, 
-    QMainWindow, 
     QGridLayout,
+    QVBoxLayout,
     QWidget,
     QLabel,
     QPushButton,
@@ -38,26 +38,21 @@ class MainWindow(QWidget):
         self.setFixedSize(QSize(550, 400))
 
         #create layout
+        layout = QVBoxLayout()
         main_layout = QGridLayout()
+        layout.addLayout(main_layout)
+        layout.addStretch()
 
         #title label
         title_label = QLabel("Welcome To Joke Generator!")
 
-        #align the title label
+        #align & size the title label
         title_label.setAlignment(Qt.AlignmentFlag.AlignHCenter | 
                                  Qt.AlignmentFlag.AlignTop)
         
         #coloring title label
         title_label.setStyleSheet("background-color:#C3ABD0")
-        """
-        BROKEN:
-        title_label.setAutoFillBackground(True)
-        pal = title_label.palette()
-        pal.setColor("195, 171, 208")
-        title_label.setPalette(pal) 
         
-        #QColor(195, 171, 208)
-        """
         #add title label
         main_layout.addWidget(title_label, 0, 1)
 
@@ -87,7 +82,7 @@ class MainWindow(QWidget):
 
         #adding the explanation label
         main_layout.addWidget(explanation_type_label, 2, 0)
-        self.setLayout(main_layout)
+        self.setLayout(layout)
 
         #joke type input box
         joke_type_input = QLineEdit()
@@ -111,10 +106,7 @@ class MainWindow(QWidget):
         go_button.setStyleSheet("background-color:#97D077")
 
         #adding go_button
-        main_layout.addWidget(go_button, 3, 2)
-
-
-        
+        main_layout.addWidget(go_button, 3, 1)
 
     #Works with joke_type_input line edit widget
     def return_pressed(self):
