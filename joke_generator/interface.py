@@ -5,12 +5,13 @@ Notes: User interface segment of the program.
 """
 
 import sys
-from PyQt6.QtGui import QPalette, QColor
+from PyQt6.QtGui import QPalette, QColor, QFontDatabase, QFont
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import (
     QApplication, 
     QGridLayout,
     QVBoxLayout,
+    QStackedLayout,
     QWidget,
     QLabel,
     QPushButton,
@@ -36,12 +37,20 @@ class MainWindow(QWidget):
         #setting minor window details
         self.setWindowTitle("Joke Generator")
         self.setFixedSize(QSize(550, 400))
+        self.setContentsMargins(20, 20, 20, 20)
 
-        #create layout
-        layout = QVBoxLayout()
+        #create layouts
+        self.layout = QVBoxLayout()
         main_layout = QGridLayout()
-        layout.addLayout(main_layout)
-        layout.addStretch()
+        results_layout = QGridLayout()
+        self.stacked_layout = QStackedLayout()
+        self.layout.addLayout(main_layout)
+        self.layout.addStretch()
+
+        #creating first screen
+        self.main_screen = QWidget()
+        self.main_screen.setLayout(main_layout)
+        self.stacked_layout.addWidget(self.main_screen)
 
         #title label
         title_label = QLabel("Welcome To Joke Generator!")
@@ -82,7 +91,7 @@ class MainWindow(QWidget):
 
         #adding the explanation label
         main_layout.addWidget(explanation_type_label, 2, 0)
-        self.setLayout(layout)
+        self.setLayout(self.layout)
 
         #joke type input box
         joke_type_input = QLineEdit()
@@ -94,8 +103,6 @@ class MainWindow(QWidget):
         joke_type_input.textChanged.connect(self.text_changed)
         joke_type_input.textEdited.connect(self.text_edited)
         
-        #aligning input box
-        
         #adding the joke type input box
         main_layout.addWidget(joke_type_input, 2, 3)
 
@@ -105,8 +112,23 @@ class MainWindow(QWidget):
         #coloring go button
         go_button.setStyleSheet("background-color:#97D077")
 
+        #adding functionality to go button
+        go_button.clicked.connect(self.next_page)
+
         #adding go_button
         main_layout.addWidget(go_button, 3, 1)
+
+        #creating results page
+        self.results_page = QWidget()
+        self.results_page.setLayout(results_layout)
+        self.stacked_layout.addWidget(self.results_page)
+
+        # reset button
+        reset_button = QPushButton("Reset")
+        reset_button.setStyleSheet("background-color:#97D077")
+        reset_button.clicked.connect(self.previous_page)
+        results_layout.addWidget(reset_button)
+
 
     #Works with joke_type_input line edit widget
     def return_pressed(self):
@@ -125,11 +147,18 @@ class MainWindow(QWidget):
         print("Text edited...")
         print(s)
 
+    def next_page(self):
+        self.stacked_layout.setCurrentIndex(
+            self.stacked_layout.currentIndex() + 1)
+        
+    def previous_page(self):
+        self.stacked_layout.setCurrentIndex(
+            self.stacked_layout.currentIndex() - 1)
 
-app = QApplication(sys.argv)
-app.setStyle("Fusion")
 
-window = MainWindow()
-window.show()
-
-app.exec()
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    app.setStyle("Fusion")
+    window = MainWindow()
+    window.show()
+    app.exec()
