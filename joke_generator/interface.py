@@ -19,15 +19,6 @@ from PyQt6.QtWidgets import (
     QSlider,
 )
 
-class Color(QWidget):
-
-    def __init__(self, color):
-        super(Color, self).__init__()
-        self.setAutoFillBackground(True)
-
-        palette = self.palette()
-        palette.setColor(QPalette.ColorRole.Window, QColor(color))
-        self.setPalette(palette)
 
 class MainWindow(QWidget):
 
@@ -44,8 +35,8 @@ class MainWindow(QWidget):
         main_layout = QGridLayout()
         results_layout = QGridLayout()
         self.stacked_layout = QStackedLayout()
-        self.layout.addLayout(main_layout)
-        self.layout.addStretch()
+        # self.layout.addLayout(main_layout)
+        #self.stacked_layout.addStretch()
 
         #creating first screen
         self.main_screen = QWidget()
@@ -75,13 +66,13 @@ class MainWindow(QWidget):
         main_layout.addWidget(explanation_number_label, 1, 0)
 
         #joke number slider
-        joke_number_slider = QSlider(Qt.Orientation.Horizontal)
-        joke_number_slider.setMinimum(1)
-        joke_number_slider.setMaximum(10) 
-        joke_number_slider.setSingleStep(10)
+        self.joke_number_slider = QSlider(Qt.Orientation.Horizontal)
+        self.joke_number_slider.setMinimum(1)
+        self.joke_number_slider.setMaximum(10) 
+        self.joke_number_slider.setSingleStep(10)
 
         #adding the joke number slider
-        main_layout.addWidget(joke_number_slider, 1, 3)
+        main_layout.addWidget(self.joke_number_slider, 1, 3)
 
         #explanation_type_label
         explanation_type_label = QLabel("Enter the type of joke:")
@@ -91,7 +82,6 @@ class MainWindow(QWidget):
 
         #adding the explanation label
         main_layout.addWidget(explanation_type_label, 2, 0)
-        self.setLayout(self.layout)
 
         #joke type input box
         joke_type_input = QLineEdit()
@@ -128,6 +118,8 @@ class MainWindow(QWidget):
         reset_button.setStyleSheet("background-color:#97D077")
         reset_button.clicked.connect(self.previous_page)
         results_layout.addWidget(reset_button)
+
+        self.setLayout(self.stacked_layout)
 
 
     #Works with joke_type_input line edit widget
