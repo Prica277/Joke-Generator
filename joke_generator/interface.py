@@ -1,7 +1,7 @@
 """
 interface.py
 by Prica277
-Notes: User interface segment of the program.
+Notes: User interface segment of the joke generator program.
 """
 
 import sys
@@ -61,6 +61,7 @@ class MainWindow(QWidget):
 
         #coloring explanation label
         explanation_number_label.setStyleSheet("background-color:#FFE599;")
+        explanation_number_label.setFont(QFont("Calibri", 12))
 
         #adding the explanation label
         main_layout.addWidget(explanation_number_label, 1, 0)
@@ -76,9 +77,10 @@ class MainWindow(QWidget):
 
         #explanation_type_label
         explanation_type_label = QLabel("Enter the type of joke:")
-
+        
         #coloring explanation label
         explanation_type_label.setStyleSheet("background-color:#FFE599")
+        explanation_type_label.setFont(QFont("Calibri", 12))
 
         #adding the explanation label
         main_layout.addWidget(explanation_type_label, 2, 0)
@@ -131,12 +133,14 @@ class MainWindow(QWidget):
 
         #coloring explanation label
         explanation_type_label.setStyleSheet("background-color:#FFE599")
+        explanation_type_label.setFont(QFont("Calibri", 12))
 
         #adding the explanation label
         results_layout.addWidget(explanation_type_label, 1, 0)
 
         # prints resulting joke (label?)
         joke_result = QLabel("What do you call a troublesome Canadian high schooler? A poutine")
+        joke_result.setFont(QFont("Calibri", 10))
 
         #adding the explanation label
         results_layout.addWidget(joke_result, 1, 1, 1, 3)
