@@ -67,16 +67,13 @@ class MainWindow(QWidget):
         #adding the explanation label
         main_layout.addWidget(explanation_number_label, 1, 0)
 
-        #joke number slider
-        self.joke_number_slider = QComboBox()
-        self.joke_number_slider.addItems(["1", "10"])
-        # self.joke_number_slider = QSlider(Qt.Orientation.Horizontal)
-        # self.joke_number_slider.setMinimum(1)
-        # self.joke_number_slider.setMaximum(10) 
-        # self.joke_number_slider.setSingleStep(10)
+        #joke number count
+        self.joke_number_count = QComboBox()
+        self.joke_number_count.addItems(["1", "10"])
+        self.joke_number_count.currentTextChanged.connect(self.text_changed)
 
         #adding the joke number slider
-        main_layout.addWidget(self.joke_number_slider, 1, 1, 1, 3)
+        main_layout.addWidget(self.joke_number_count, 1, 1, 1, 3)
 
         #explanation_type_label
         explanation_type_label = QLabel("Select the type of joke: ")
@@ -91,13 +88,7 @@ class MainWindow(QWidget):
         #joke type input box, use .currentTextChanged signal?
         self.joke_type_input = QComboBox()
         self.joke_type_input.addItems(["Programming", "General", "Knock-knock"])
-        # self.joke_type_input = QLineEdit()
-        # self.joke_type_input.setMaxLength(15)
-        # self.joke_type_input.setPlaceholderText("Type here!")
-        # self.joke_type_input.returnPressed.connect(self.return_pressed)
-        #self.joke_type_input.selectionChanged.connect(self.selection_changed)
-        #self.joke_type_input.textChanged.connect(self.text_changed)
-        #self.joke_type_input.textEdited.connect(self.text_edited)
+        self.joke_type_input.currentTextChanged.connect(self.text_changed)
         
         #adding the joke type input box
         main_layout.addWidget(self.joke_type_input, 2, 1, 1, 3)
@@ -143,7 +134,7 @@ class MainWindow(QWidget):
         results_layout.addWidget(explanation_type_label, 1, 0)
 
         # prints resulting joke (label?)
-        joke_result = QLabel("What do you call a troublesome Canadian high schooler? A poutine")
+        joke_result = QLabel()
         joke_result.setFont(QFont("Calibri", 10))
 
         #adding the explanation label
@@ -158,27 +149,16 @@ class MainWindow(QWidget):
         self.setLayout(self.stacked_layout)
 
     #Works with self.joke_type_input combo box widget
-    def joke_number(self):
-        joke_amount = self.joke_number_slider.currentTextChanged.text()
-        print(joke_amount)
-        
-    #Works with self.joke_type_input line edit widget
-    # def return_pressed(self):
-    #     print("Return pressed!")
-    #     joke_type = self.joke_type_input.text()
-    #     print(joke_type)
+    def text_changed(self, s):
+        print("Text changed:", s)
+    
+    def activated(Self, index):
+        print("Activated index:", index)
 
-    # def selection_changed(self):
-    #     print("Selection changed")
-    #     print(self.joke_type_input.text())
+    def index_changed(self, index):
+        print("Index changed", index)
 
-    # def text_changed(self, s):
-    #     print("Text changed...")
-    #     print(s)
-
-    # def text_edited(self, s):
-    #     print("Text edited...")
-    #     print(s)
+    #Works for stacked layout
 
     def next_page(self):
         self.stacked_layout.setCurrentIndex(
