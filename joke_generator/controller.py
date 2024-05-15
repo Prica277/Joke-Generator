@@ -24,7 +24,7 @@ def make_api_call(type_of_joke, amount_of_jokes):
         output = get_output(response)
     else:
         output = f"There was an error: {response.status_code}"
-    print(output)
+    return output
 
 def get_output(response):
     output = ""
