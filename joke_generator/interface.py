@@ -10,15 +10,13 @@ from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import (
     QApplication, 
     QGridLayout,
-    QVBoxLayout,
     QStackedLayout,
     QWidget,
     QLabel,
     QPushButton,
-    QLineEdit,
-    QSlider,
     QComboBox,
 )
+import controller as ctrl
 
 
 class MainWindow(QWidget):
