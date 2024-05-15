@@ -101,6 +101,7 @@ class MainWindow(QWidget):
 
         #adding functionality to go button
         go_button.clicked.connect(self.next_page)
+        go_button.clicked.connect(self.get_values)
 
         #adding go_button
         main_layout.addWidget(go_button, 3, 1)
@@ -157,9 +158,14 @@ class MainWindow(QWidget):
 
     def index_changed(self, index):
         print("Index changed", index)
+    
+    def get_values(self):
+        number_of_jokes = self.joke_number_count.currentText()
+        type_of_joke = self.joke_type_input.currentText()
+        print("Current Number: " + number_of_jokes)
+        print("Joke Type: " + type_of_joke)
 
     #Works for stacked layout
-
     def next_page(self):
         self.stacked_layout.setCurrentIndex(
             self.stacked_layout.currentIndex() + 1)
@@ -167,7 +173,10 @@ class MainWindow(QWidget):
     def previous_page(self):
         self.stacked_layout.setCurrentIndex(
             self.stacked_layout.currentIndex() - 1)
-
+        
+    #functionality
+    def get_url():
+        
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -175,3 +184,5 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     app.exec()
+
+
