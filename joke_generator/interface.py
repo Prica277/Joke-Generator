@@ -176,7 +176,7 @@ class MainWindow(QWidget):
         
     #functionality
     def get_url():
-        
+        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
