@@ -17,7 +17,6 @@ from PyQt6.QtWidgets import (
     QComboBox,
 )
 import controller as ctrl
-import requests as re
 
 
 class MainWindow(QWidget):
@@ -99,11 +98,9 @@ class MainWindow(QWidget):
         go_button.setStyleSheet("background-color:#97D077")
 
         #adding functionality to go button
-        go_button.clicked.connect(self.next_page)
-        go_button.clicked.connect(self.get_values)
-        # go_button.clicked.connect(ctrl.base_url)
-        go_button.clicked.connect(ctrl.make_api_call)
-        go_button.clicked.connect(ctrl.get_output)
+        go_button.clicked.connect(self.get_jokes)
+        # go_button.clicked.connect(self.get_values)
+        # go_button.clicked.connect(ctrl.make_api_call)
 
         #adding go_button
         main_layout.addWidget(go_button, 3, 1)
@@ -160,32 +157,30 @@ class MainWindow(QWidget):
 
     def index_changed(self, index):
         print("Index changed", index)
+
+    def get_jokes(self):
+        number, joke_type  = self.get_values()
+        joke_type = joke_type.lower()
+        response = ctrl.make_api_call(joke_type, number)
+        self.next_page(response)
     
     def get_values(self):
         number_of_jokes = self.joke_number_count.currentText()
         type_of_joke = self.joke_type_input.currentText()
         print("Current Number: " + number_of_jokes)
         print("Joke Type: " + type_of_joke)
+        return number_of_jokes, type_of_joke
 
     #Works for stacked layout
-    def next_page(self):
+    def next_page(self, jokes=""):
         self.stacked_layout.setCurrentIndex(
             self.stacked_layout.currentIndex() + 1)
+        if self.stacked_layout.currentIndex == 1:
+            pass
         
     def previous_page(self):
         self.stacked_layout.setCurrentIndex(
             self.stacked_layout.currentIndex() - 1)
-        
-    #functionality
-    def get_output(response):
-        output = ""
-        jokes = response.json()
-        for joke in jokes:
-            setup = joke.get("setup")
-            print(setup)
-            punchline = joke.get("punchline")
-            print(punchline)
-        return output
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -21,22 +21,23 @@ def make_api_call(type_of_joke, number_of_jokes):
 
     
     if response.ok:
-        output = get_output(response)
+        jokes = response.json()
+        output = get_output(jokes)
     else:
         output = f"There was an error: {response.status_code}"
     return output
 
-def get_output(response):
+def get_output(jokes):
     output = ""
-    jokes = response.json()
     for joke in jokes:
         setup = joke.get("setup")
         print(setup)
         punchline = joke.get("punchline")
         print(punchline)
+        print(" ")
     return output
 
 if __name__ == "__main__":
-    make_api_call("programming", "1")
+    make_api_call("general", "1")
     
 
