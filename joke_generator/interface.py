@@ -17,6 +17,7 @@ from PyQt6.QtWidgets import (
     QComboBox,
 )
 import controller as ctrl
+import requests as re
 
 
 class MainWindow(QWidget):
@@ -100,6 +101,9 @@ class MainWindow(QWidget):
         #adding functionality to go button
         go_button.clicked.connect(self.next_page)
         go_button.clicked.connect(self.get_values)
+        # go_button.clicked.connect(ctrl.base_url)
+        go_button.clicked.connect(ctrl.make_api_call)
+        go_button.clicked.connect(ctrl.get_output)
 
         #adding go_button
         main_layout.addWidget(go_button, 3, 1)
@@ -173,8 +177,15 @@ class MainWindow(QWidget):
             self.stacked_layout.currentIndex() - 1)
         
     #functionality
-    def get_url():
-        pass
+    def get_output(response):
+        output = ""
+        jokes = response.json()
+        for joke in jokes:
+            setup = joke.get("setup")
+            print(setup)
+            punchline = joke.get("punchline")
+            print(punchline)
+        return output
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
