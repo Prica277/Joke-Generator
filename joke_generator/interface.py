@@ -134,11 +134,11 @@ class MainWindow(QWidget):
         results_layout.addWidget(explanation_type_label, 1, 0)
 
         # prints resulting joke (label?)
-        joke_result = QLabel()
-        joke_result.setFont(QFont("Calibri", 10))
+        self.joke_result = QLabel()
+        self.joke_result.setFont(QFont("Calibri", 10))
 
         #adding the explanation label
-        results_layout.addWidget(joke_result, 1, 1, 1, 3)
+        results_layout.addWidget(self.joke_result, 1, 1, 1, 3)
 
         # reset button
         reset_button = QPushButton("Reset")
@@ -170,6 +170,11 @@ class MainWindow(QWidget):
         print("Current Number: " + number_of_jokes)
         print("Joke Type: " + type_of_joke)
         return number_of_jokes, type_of_joke
+    
+    def call(self):
+       call_results = ctrl.make_api_call()
+       self.joke_result.setText(call_results)
+
 
     #Works for stacked layout
     def next_page(self, jokes=""):
