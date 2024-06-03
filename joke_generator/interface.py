@@ -99,8 +99,7 @@ class MainWindow(QWidget):
 
         #adding functionality to go button
         go_button.clicked.connect(self.get_jokes)
-        # go_button.clicked.connect(self.get_values)
-        # go_button.clicked.connect(ctrl.make_api_call)
+        go_button.clicked.connect(self.call)
 
         #adding go_button
         main_layout.addWidget(go_button, 3, 1)
@@ -135,6 +134,7 @@ class MainWindow(QWidget):
 
         # prints resulting joke (label?)
         self.joke_result = QLabel()
+        #self.joke_result.setText()
         self.joke_result.setFont(QFont("Calibri", 10))
 
         #adding the explanation label
@@ -165,14 +165,14 @@ class MainWindow(QWidget):
         self.next_page(response)
     
     def get_values(self):
-        number_of_jokes = self.joke_number_count.currentText()
-        type_of_joke = self.joke_type_input.currentText()
-        print("Current Number: " + number_of_jokes)
-        print("Joke Type: " + type_of_joke)
-        return number_of_jokes, type_of_joke
+        self.number_of_jokes = self.joke_number_count.currentText()
+        self.type_of_joke = self.joke_type_input.currentText()
+        print("Current Number: " + self.number_of_jokes)
+        print("Joke Type: " + self.type_of_joke)
+        return self.number_of_jokes, self.type_of_joke
     
     def call(self):
-       call_results = ctrl.make_api_call()
+       call_results = ctrl.make_api_call(self.number_of_jokes, self.type_of_joke)
        self.joke_result.setText(call_results)
 
 
